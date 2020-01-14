@@ -6,6 +6,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>DotNetVersionCheck</RootNamespace>
     <UseWPF>true</UseWPF>
+    <PackageId>DotNetVersionCheck</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>tjmoore</Authors>
+    <PackageDescription>Reports .NET runtime version information and/or triggers a prompt to install .NET Core runtime if applicable</PackageDescription>
+    <RepositoryUrl>https://github.com/tjmoore/dotnet-version-check</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

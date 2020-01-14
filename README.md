@@ -1,4 +1,7 @@
 # dotnet-version-check
+
+https://github.com/tjmoore/dotnet-version-check/workflows/build/badge.svg
+
 Reports .NET runtime version information and/or triggers a prompt to install .NET Core runtime if applicable
 
 
