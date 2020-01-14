@@ -1,6 +1,8 @@
 name: publish
 
-on: [release]
+on:
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -30,4 +32,4 @@ jobs:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         
     - name: Publish
-      run: dotnet nuget push bin/Release/*.nupkg
+      run: dotnet nuget push bin\Release\*.nupkg
