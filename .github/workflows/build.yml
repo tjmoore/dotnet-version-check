@@ -15,7 +15,9 @@ jobs:
       with:
         dotnet-version: 3.1.100
   
-    - name: Build with dotnet
-      run: dotnet build --configuration Release
+    - name: Build x64
+      run: dotnet publish -c Release -r win7-x64
 
-  
+    - name: Build x86
+      run: dotnet publish -c Release -r win7-x86
+

@@ -4,6 +4,13 @@
     <!-- Needs to be WinExe to trigger install prompt for .NET Core. This does prevent console output though so have to work around that -->
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <!-- Target win7 x86/x64 but not self contained so is FDE, yet package as single file and compile ready-to-run for small executable -->
+    <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
+    <SelfContained>false</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    
     <RootNamespace>DotNetVersionCheck</RootNamespace>
     <UseWPF>true</UseWPF>
     <PackageId>DotNetVersionCheck</PackageId>

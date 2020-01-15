@@ -15,7 +15,7 @@ namespace DotNetVersionCheck
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            var rootCommand = new RootCommand(description: "Reports .NET runtime version information and triggers a prompt to install .NET Core runtime if applicable")
+            var rootCommand = new RootCommand(description: "Reports .NET runtime version information and/or triggers a prompt to install .NET Core runtime if applicable")
             {
                 new Option(new[] { "--no-window" }, "Don't display window, write version information to console"),
                 new Option(new[] { "--silent" }, "Don't display window or write to console. Useful to only trigger .NET Core install if necessary")
