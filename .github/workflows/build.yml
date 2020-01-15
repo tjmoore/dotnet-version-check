@@ -15,9 +15,14 @@ jobs:
       with:
         dotnet-version: 3.1.100
   
-    - name: Build x64
-      run: dotnet publish -c Release -r win7-x64
+    - name: Build x64 Win app
+      run: dotnet publish .\WindowsWithPrompt\dotnet-version-check-win.csproj -c Release -r win7-x64
 
-    - name: Build x86
-      run: dotnet publish -c Release -r win7-x86
+    - name: Build x86 Win app
+      run: dotnet publish .\WindowsWithPrompt\dotnet-version-check-win.csproj -c Release -r win7-x86
 
+    - name: Build x64 console app
+      run: dotnet publish .\Console\dotnet-version-check-console.csproj -c Release -r win7-x64
+
+    - name: Build x86 console app
+      run: dotnet publish .\Console\dotnet-version-check-console.csproj -c Release -r win7-x86

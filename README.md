@@ -2,30 +2,38 @@
 
 ![](https://github.com/tjmoore/dotnet-version-check/workflows/build/badge.svg)
 
-Reports .NET runtime version information and/or triggers a prompt to install .NET Core runtime if applicable
+Sample apps to simply report .NET runtime version information and can aid with an installer to check runtime presence. This simply relies on .NET Core 3 app host ability to check runtime and report error or display a prompt to download the runtime.
+
+A use case for this is with an installer that installs a .NET Core FDD/FDE service but needs to check and install the runtime prior to starting the service, or likewise with a console or desktop app, but not wanting to wait for a prompt or error when the user launches the app itself, but install the runtime during install.
+
+There are two samples here:
+
+### Console
+
+This version is simply a console app and writes version info to the console. If the runtime is not present the dotnet host will report an error with advice to the console and will return an error code, which is one of https://github.com/dotnet/runtime/blob/master/docs/design/features/host-error-codes.md
+
+For example, CoreHostLibMissingFailure (0x80008083) can indicate a compatible runtime required based on the target is not present. An installer could check this and then run the required installer.
+
+### WindowsWithPrompt
+
+This version is built as a basic WPF windows app to do the same thing but shows a window with the runtime information. Perhaps useful for support scenarios.
+
+The key here though is when built as a WinEXE output type, the dotnet host will provide a prompt to the user to download the runtime if not present. Although currently it only directs the user's browser to the runtime download home page.
+
 
 ## Usage
 
 ```
-dotnet-version-check:
-  Reports .NET runtime version information and/or triggers a prompt to install runtime if applicable
-
 Usage:
-  dotnet-version-check [options]
+  dotnet-version-check(-win|-console) [options]
 
 Options:
-  --no-window    Don't display window, write version information to console
-  --silent       Don't display window or write to console. Useful to only trigger .NET Core install if necessary
+  --no-window    Don't display window, write version information to console (Windows app only)
+  --silent       Don't display window or write to console. Useful to only trigger .NET Core install if necessary (windows) or raise error code (windows & console)
   --version      Display version information
 ```
 
 This relies on .NET Core 3+ built-in support for prompting download and install of .NET Core runtime if not installed when running an executable. This only occurs with Windows GUI Executables.
-
-This idea behind this is primarily for use when installing console or service applications that cannot self-prompt for install of the runtime. The solution here is by creating a WinExe executable targetting .NET Core 3 and running that during install, it should prompt for the missing runtime. This is as an alternative to scripting an installer to detect a compatible runtime globally installed which can be somewhat complex and the framework has built in support for this anyway.
-
-The executabe need do nothing other than start and shut down, but it does have to be a WinExe target.
-
-In this example it does a little more by providing a window showing the installed framework and/or reporting to console, but with a 'silent' option for use in an installer so it either does nothing or the user receives a prompt to install the runtime.
 
 Note, this depends on Framework Dependent Executable (FDE) mode of deployment (which is also the default for FDD now in .NET Core 3). It's not relevant to Self Contained Deploment (SCD) as the published application will contain all the dependent runtime and is fixed to the specified target runtime version and platform.
 

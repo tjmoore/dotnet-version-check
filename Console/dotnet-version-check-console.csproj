@@ -1,8 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <!-- Needs to be WinExe to trigger install prompt for .NET Core. This does prevent console output though so have to work around that -->
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <!-- Target win7 x86/x64 but not self contained so is FDE, yet package as single file and compile ready-to-run for small executable -->
@@ -10,15 +9,15 @@
     <SelfContained>false</SelfContained>
     <PublishSingleFile>true</PublishSingleFile>
     <PublishReadyToRun>true</PublishReadyToRun>
+
+    <Version>0.2.0</Version>
     
     <RootNamespace>DotNetVersionCheck</RootNamespace>
-    <UseWPF>true</UseWPF>
-    <PackageId>DotNetVersionCheck</PackageId>
-    <Version>0.1.0</Version>
-    <Authors>tjmoore</Authors>
-    <PackageDescription>Reports .NET runtime version information and/or triggers a prompt to install .NET Core runtime if applicable</PackageDescription>
-    <RepositoryUrl>https://github.com/tjmoore/dotnet-version-check</RepositoryUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Common\VersionInfo.cs"/>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.CommandLine" Version="0.3.0-alpha.20054.1" />
