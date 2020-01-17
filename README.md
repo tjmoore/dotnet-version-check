@@ -6,13 +6,21 @@ Sample apps to simply report .NET runtime version information and can aid with a
 
 A use case for this is with an installer that installs a .NET Core FDD/FDE service but needs to check and install the runtime prior to starting the service, or likewise with a console or desktop app, but not wanting to wait for a prompt or error when the user launches the app itself, but install the runtime during install.
 
+## Update
+
+Note: The built-in app host checks only check for the runtime required for the executable, which means for a console app it only requires the base .NET Core runtime. For a Windows app it requires .NET Core Desktop runtime and if the base runtime or hosting runtime is installed, this may still fail.
+
+Not sure if different error codes returned can indicate what it missing or if using a Windows app to at least check the basic runtime is present or missing.
+
+## Samples
+
 There are two samples here:
 
 ### Console
 
 This version is simply a console app and writes version info to the console. If the runtime is not present the dotnet host will report an error with advice to the console and will return an error code, which is one of https://github.com/dotnet/runtime/blob/master/docs/design/features/host-error-codes.md
 
-For example, CoreHostLibMissingFailure (0x80008083) can indicate a compatible runtime required based on the target is not present. An installer could check this and then run the required installer.
+For example, CoreHostLibMissingFailure (0x80008083) or FrameworkMissingFailure (0x80008096) can indicate a compatible runtime required based on the target is not present. An installer could check this and then run the required installer.
 
 ### WindowsWithPrompt
 
@@ -21,7 +29,7 @@ This version is built as a basic WPF windows app to do the same thing but shows 
 The key here though is when built as a WinEXE output type, the dotnet host will provide a prompt to the user to download the runtime if not present. Although currently it only directs the user's browser to the runtime download home page.
 
 
-## Usage
+### Usage
 
 ```
 Usage:
